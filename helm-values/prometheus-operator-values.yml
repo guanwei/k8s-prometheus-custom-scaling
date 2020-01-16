@@ -1,10 +1,31 @@
-# We don't need the alertmanager for this demo
 alertmanager:
-  enabled: false
+  alertmanagerSpec:
+    externalUrl: http://localhost/alertmanager
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    paths:
+      - /alertmanager(/|$)(.*)
 
-# This configuration means all ServiceMonitors in the namespsace will be picked up
-# Use with caution!
-prometheus: 
+prometheus:
   prometheusSpec:
-    serviceMonitorSelectorNilUsesHelmValues: false
-    serviceMonitorSelector: {}
+    externalUrl: http://localhost/prometheus
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    paths:
+      - /prometheus(/|$)(.*)
+
+grafana:
+  adminPassword: admin
+  env:
+    GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/grafana"
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$2
+    hosts:
+      - ""
+    path: /grafana(/|$)(.*)

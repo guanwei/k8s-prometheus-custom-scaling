@@ -15,7 +15,11 @@ spec:
     spec:
       containers:
       - name: prometheus-demo-app
-        image: flipstone42/k8s-prometheus-custom-scaling:latest
+        image: guanwei/k8s-prometheus-custom-scaling:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: APPLICATION_ROOT
+          value: /prometheus-demo-app
         resources:
           limits:
             memory: "128Mi"

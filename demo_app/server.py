@@ -1,9 +1,11 @@
 from flask import Flask, render_template
 from prometheus_flask_exporter.multiprocess import GunicornInternalPrometheusMetrics
+import os
 
 application = Flask(__name__, static_folder="./public", template_folder="./templates")
 metrics = GunicornInternalPrometheusMetrics(application)
 
+application.config['APPLICATION_ROOT'] = os.environ.get('APPLICATION_ROOT', '/')
 
 @application.route("/")
 def index():

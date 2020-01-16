@@ -19,7 +19,7 @@ class SendButton extends React.Component {
     handleClick() {
         if (!this.state.isLoading) {
             this.setState({ "isLoading": true })
-            axios.post("/click-button").then((response) => {
+            axios.post("click-button").then((response) => {
                 console.log(response);
             }).then(() => {
                 this.setState({ "isLoading": false })
@@ -44,8 +44,8 @@ export default class Home extends React.Component {
                         <h1>Demonstration: Custom Scaling with Kubernetes & Prometheus</h1>
                         <p>
                             <Row>
-                                <Col md={6} className="logo-col"><Image src="/public/img/kubernetes_logo.png"></Image></Col>
-                                <Col md={6} className="logo-col"><Image src="/public/img/prometheus_logo.png"></Image></Col>
+                                <Col md={6} className="logo-col"><Image src="public/img/kubernetes_logo.png"></Image></Col>
+                                <Col md={6} className="logo-col"><Image src="public/img/prometheus_logo.png"></Image></Col>
                             </Row>
                             <Row>
                                 <Col>
