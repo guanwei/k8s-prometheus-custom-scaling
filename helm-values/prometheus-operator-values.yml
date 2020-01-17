@@ -10,6 +10,10 @@ alertmanager:
 
 prometheus:
   prometheusSpec:
+    # This configuration means all ServiceMonitors in the namespsace will be picked up
+    # Use with caution!
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
     externalUrl: http://localhost/prometheus
   ingress:
     enabled: true
